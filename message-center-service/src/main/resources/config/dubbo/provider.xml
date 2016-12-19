@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+	default-lazy-init="false">
+	
+	<!-- application name -->
+	<dubbo:application name="message-service" />
+	
+	<!-- registry address, used for consumer to discover services -->
+	<dubbo:registry address="${dubbo.zookeeper.address}" id="defaultRegistry" />
+	
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="${dubbo.service.port}" serialization="kryo" optimizer="wangmin.message.core.entity.serialization.SerializationOptimizerImpl" />
+
+	<dubbo:monitor protocol="registry" />
+	
+	<!-- Web接口 -->
+	<dubbo:service interface="wangmin.message.core.remote.MessageServiceInterface" ref="messageService" registry="defaultRegistry" timeout="2000" retries="0" version="1.0.0" />
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+ http://www.springframework.org/schema/beans/spring-beans.xsd      
+ http://code.alibabatech.com/schema/dubbo        
+ http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- application name -->
+	<dubbo:application name="unconfirmed-message-checker" />
+
+	<!-- registry address, used for consumer to discover services -->
+	<dubbo:registry address="${dubbo.zookeeper.address}" id="defaultRegistry" />
+
+	<dubbo:consumer timeout="10000" check="false" retries="0"></dubbo:consumer>
+	<dubbo:reference id="messageService" interface="wangmin.message.core.remote.MessageServiceInterface" registry="defaultRegistry" version="1.0.0" />
+</beans>

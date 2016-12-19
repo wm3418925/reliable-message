@@ -1,1 +1,7 @@
-.log
+.idea/
+logs/
+build/
+*/target/*
+
+*.class
+*.iml
