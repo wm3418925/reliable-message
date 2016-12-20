@@ -16,7 +16,7 @@ public class MessageRowMapper implements RowMapper<Message> {
 		element.id = rs.getString(1);
 		element.source = rs.getString(2);
 		element.retry = rs.getInt(3);
-		element.status = MessageStatus.valueOf(rs.getInt(4));
+		element.status = MessageStatus.valueOf(rs.getInt(4), true);
 		element.createTime = rs.getDate(5);
 		element.updateTime = rs.getDate(6);
 		element.queue = rs.getString(7);

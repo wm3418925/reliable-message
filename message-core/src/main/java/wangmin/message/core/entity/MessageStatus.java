@@ -1,9 +1,11 @@
 package wangmin.message.core.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by wm on 2016/12/18.
  */
-public enum MessageStatus {
+public enum MessageStatus implements Serializable {
     MessageStatus_unconfirmed(0),   // 待确认
     MessageStatus_confirmed(1),   // 确认未发送
     MessageStatus_sending(2),   // 发送中
@@ -25,12 +27,16 @@ public enum MessageStatus {
         else
             return status.value;
     }
-    public static MessageStatus valueOf(int value) {
+    public static MessageStatus valueOf(int value, boolean returnDefault) {
         MessageStatus[] list = MessageStatus.values();
         for (int i=0; i<list.length; ++i) {
             if (list[i].value == value)
                 return list[i];
         }
-        return defaultEnum;
+
+        if (returnDefault)
+            return defaultEnum;
+        else
+            return null;
     }
 }

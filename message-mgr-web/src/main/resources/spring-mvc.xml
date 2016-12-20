@@ -19,6 +19,10 @@
 
 	<mvc:annotation-driven/>
 
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
+
     <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
     <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -32,4 +36,7 @@
     
 
 	<import resource="classpath:spring-mvc-multi-language.xml"/>
+
+    <!-- swagger 配置-->
+    <bean name="applicationSwaggerConfig" class="wangmin.message.mgr_web.web.swagger.ApplicationSwaggerConfig"/>
 </beans>

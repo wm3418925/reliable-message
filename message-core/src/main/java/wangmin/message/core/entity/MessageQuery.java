@@ -2,15 +2,16 @@ package wangmin.message.core.entity;
 
 import com.google.common.collect.Lists;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by wm on 2016/12/18.
  */
-public class MessageQuery {
+public class MessageQuery implements Serializable {
 
-    public enum Field {
+    public enum Field implements Serializable {
         id("id"),
         source("source"),
         queue("queue"),
@@ -26,7 +27,7 @@ public class MessageQuery {
         }
         public String getFieldName() {return fieldName;}
     }
-    public enum CompareOperator {
+    public enum CompareOperator implements Serializable {
         equal("="),
         notEqual("!="),
         biggerThen(">"),
@@ -43,7 +44,7 @@ public class MessageQuery {
 
 
 
-    public class FieldCompareElement {
+    public class FieldCompareElement implements Serializable {
         public Field field;
         public CompareOperator compareOperator;
         public Object value;

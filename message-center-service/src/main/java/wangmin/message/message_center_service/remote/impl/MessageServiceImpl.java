@@ -47,6 +47,7 @@ public class MessageServiceImpl implements MessageServiceInterface {
 			return false;
 
 		msg.status = MessageStatus.MessageStatus_confirmed;
+		msg.retry = 0;
 		msg.updateTime = new Date();
 		return 1 == messageService.updateById(msg);
 	}

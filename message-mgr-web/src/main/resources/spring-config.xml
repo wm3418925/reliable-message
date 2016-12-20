@@ -9,4 +9,6 @@
 	<!-- properties配置文件路径 -->
     <context:property-placeholder location="classpath:system-config.properties"/>
 
+
+    <import resource="classpath:remote-consumer.xml"/>
 </beans>

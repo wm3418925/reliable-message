@@ -42,6 +42,7 @@
 		<fastjson.version>1.2.6</fastjson.version>
 		<guava.version>18.0</guava.version>
 		<hibernate.version>5.1.0.Final</hibernate.version>
+		<jackson.version>2.8.5</jackson.version>
 		<javax-activation.version>1.1</javax-activation.version>
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
 		<jedis.version>2.9.0</jedis.version>
@@ -75,6 +76,8 @@
 		<spring-mock.version>2.0.8</spring-mock.version>
 		<spring.version>4.2.8.RELEASE</spring.version>
 		<standard.version>1.1.2</standard.version>
+		<swagger-springmvc.version>1.0.2</swagger-springmvc.version>
+		<swagger.version>2.2.2</swagger.version>
 		<zkclient.version>0.9</zkclient.version>
 	</properties>
 
@@ -122,9 +125,24 @@
 				<version>${log4j2.version}</version>
 			</dependency>
         	<!-- LOGGING end -->
-        
 
-	        
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
 			<dependency>
 			    <groupId>org.apache.commons</groupId>
 			    <artifactId>commons-lang3</artifactId>
@@ -497,7 +515,23 @@
 				</exclusions>
 			</dependency>
 			<!-- duubo end -->
-        
+
+			<dependency>
+				<groupId>com.mangofactory</groupId>
+				<artifactId>swagger-springmvc</artifactId>
+				<version>${swagger-springmvc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${swagger.version}</version>
+			</dependency>
+			<!--petstore是官方的一个demo，加入此依赖是为了稍后参考接口描述的编写-->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-petstore</artifactId>
+				<version>${swagger.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	

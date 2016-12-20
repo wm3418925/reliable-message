@@ -1,11 +1,12 @@
 package wangmin.message.core.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by wm on 2016/12/18.
  */
-public class Message {
+public class Message implements Serializable {
     public String id;
     public String source;
     public String queue;

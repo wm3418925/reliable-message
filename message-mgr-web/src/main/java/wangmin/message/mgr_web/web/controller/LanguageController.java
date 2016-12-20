@@ -5,6 +5,8 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -16,22 +18,20 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
 /**
  * <p>User: Wang Min
- * <p>Date: 2016-8-5
+ * <p>Date: 2016-12-19
  * <p>Version: 1.0
- * 动态改变系统的语言
  */
 @Controller
 @RequestMapping("/")
+@Api(description = "动态改变系统的语言")
 public class LanguageController {
 	@Autowired
 	CookieLocaleResolver resolver;
 	//@Autowired
 	//SessionLocaleResolver resolver;
 
-	/**
-	 * 语言切换
-	 */
 	@RequestMapping("changeLanguage/{language}")
+	@ApiOperation(value = "语言切换")
 	public ModelAndView language(HttpServletRequest request, HttpServletResponse response, @PathVariable("language") String language) {
 		if (StringUtils.isEmpty(language)) {
 			return new ModelAndView("redirect:/");
