@@ -5,7 +5,13 @@
  http://www.springframework.org/schema/beans/spring-beans.xsd      
  http://code.alibabatech.com/schema/dubbo        
  http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-	
+
+	<!-- application name -->
+	<dubbo:application name="demo-message-business-consumer" />
+
+	<!-- registry address, used for consumer to discover services -->
+	<dubbo:registry address="${dubbo.zookeeper.address}" id="defaultRegistry" />
+
 	<dubbo:consumer timeout="10000" check="false" retries="0"></dubbo:consumer>
-	<dubbo:reference id="monitorService" interface="cwangmin.message.ttt.MonitorService" registry="defaultRegistry" version="1.0.0" />
+	<dubbo:reference id="messageService" interface="wangmin.message.core.remote.MessageServiceInterface" registry="defaultRegistry" version="1.0.0" />
 </beans>

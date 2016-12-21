@@ -1,4 +1,4 @@
-package wangmin.message.test_service;
+package lanchuang.rdms.test_service;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -9,8 +9,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import wangmin.message.core.entity.MyUserEntity;
-import wangmin.message.core.remote.MyRemoteServiceInterface;
+import wangmin.message.core.remote.MessageServiceInterface;
 
 @WebListener
 public class Test {
@@ -20,8 +19,8 @@ public class Test {
 
 	
 	public void test() {
-		MyRemoteServiceInterface service = context.getBean(MyRemoteServiceInterface.class);
-		MyUserEntity result = service.getUserById("1");
+		MessageServiceInterface service = context.getBean(MessageServiceInterface.class);
+		boolean result = service.closeMessage("1");
 		System.out.println("result = " + result);
 	}
 	
