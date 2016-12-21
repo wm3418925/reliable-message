@@ -2,6 +2,7 @@ package wangmin.message.unconfirmed_message_checker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import wangmin.demo_initiative_business.core.Constants;
 import wangmin.demo_initiative_business.core.remote.DemoInitiativeBusinessServiceInterface;
 import wangmin.message.core.entity.Message;
 
@@ -15,7 +16,7 @@ public class Confirmer {
 
     public Boolean confirm(Message msg) {
         switch (msg.source) {
-            case "demoInitiativeBusinessService":
+            case Constants.messageSource:
                 return demoInitiativeBusinessService.isMessageBusinessExist(msg.id);
 
             default:

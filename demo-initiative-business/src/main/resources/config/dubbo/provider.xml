@@ -13,7 +13,7 @@
 	<dubbo:registry address="${dubbo.zookeeper.address}" id="defaultRegistry" />
 	
 	<!-- 用dubbo协议在20880端口暴露服务 -->
-	<dubbo:protocol name="dubbo" serialization="kryo" port="${dubbo.service.port}" optimizer="wangmin.message.core.entity.serialization.SerializationOptimizerImpl" />
+	<dubbo:protocol name="dubbo" serialization="kryo" port="${dubbo.service.port}" optimizer="wangmin.demo_initiative_business.core.entity.serialization.SerializationOptimizerImpl" />
 	
 	<dubbo:monitor protocol="registry" />
 	

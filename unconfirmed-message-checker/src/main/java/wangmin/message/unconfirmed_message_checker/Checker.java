@@ -55,7 +55,6 @@ public class Checker implements Runnable{
                     List<Message> confirmedList = Lists.newArrayList();
                     List<String> notExistIdList = Lists.newArrayList();
                     for (Message msg : unconfirmedList) {
-                        // TODO 与应用确认
                         Boolean confirmResult = confirmer.confirm(msg);
 
                         if (null != confirmResult) {
