@@ -50,10 +50,10 @@ public class MessageController {
         return new CommonResponseBody();
     }*/
 
-    @RequestMapping(value = "/sendMessage/{messageId}", method = RequestMethod.POST, produces = "application/json")
-    @ApiOperation(value = "设置消息状态")
-    public CommonResponseBody sendMessage(@PathVariable("messageId") String messageId) {
-        if (messageService.reliveMessage(messageId))
+    @RequestMapping(value = "/reliveAndSendMessage/{messageId}", method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation(value = "复活发送消息状态")
+    public CommonResponseBody reliveAndSendMessage(@PathVariable("messageId") String messageId) {
+        if (messageService.reliveAndSendMessage(messageId))
             return new CommonResponseBody();
         else
             return new CommonResponseBody(CommonResponseCode.paramError, "messageId["+messageId+"], not exist");

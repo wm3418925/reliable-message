@@ -11,12 +11,26 @@
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-10 column">
+				<div class="toolbar">
+					<form id="queryForm" class="form-inline" role="form">
+						<div class="form-group">
+							<label>消息类型:</label>
+							<select id="messageStatus">
+								<option value="MessageStatus_unconfirmed">MessageStatus_unconfirmed</option>
+								<option value="MessageStatus_confirmed">MessageStatus_confirmed</option>
+								<option value="MessageStatus_sending">MessageStatus_sending</option>
+								<option value="MessageStatus_dead" selected>MessageStatus_dead</option>
+								<option value="MessageStatus_end">MessageStatus_end</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<div id="dataMsg"  hidden ></div>
+						</div>
+					</form>
+				</div>
+
 				<table id="messageTable" class="table-striped table-hover" data-mobile-responsive="true" data-toolbar=".toolbar">
 				</table>
-
-				<div class="form-group">
-					<div id="dataMsg"  hidden ></div>
-				</div>
 			</div>
 		</div>
 	</div>

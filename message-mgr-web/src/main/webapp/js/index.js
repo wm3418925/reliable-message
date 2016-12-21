@@ -19,15 +19,40 @@ function getInitialPageSize() {
 }
 
 
+var lastQueryOffset = 0, lastQueryLimit = 0;
 var responseHandlerFunc = function(res) {
-	return {"code":"0", "rows":res, "total":res.length};
-}
+	var total = lastQueryOffset + lastQueryLimit;
+	if (res.length == lastQueryLimit)
+		total += lastQueryLimit;
 
+	return {"code":"0", "rows":res, "total":total};
+}
 var queryParamsFunc = function(params) {
-	params["messageStatus"] = "MessageStatus_dead";
+	params["messageStatus"] = document.getElementById("messageStatus").value;
 	params["orderBy"] = "id";
 	params["desc"] = false;
+
+	lastQueryOffset = params["offset"];
+	lastQueryLimit = params["limit"];
 	return params;
+}
+
+function sendMessage(id) {
+	var callback = function(response) {
+		if (0 == response.code)
+			divMsg('#dataMsg','发送成功','alert-success');
+		else
+			divMsg('#dataMsg',response.message,'alert-success');
+	};
+	$.post("message/reliveAndSendMessage/" + id, {}, callback);
+
+}
+var sendBtnFormatter = function(value,r,index) {
+	if (r.status == "MessageStatus_dead") {
+		return "<input type='button' onclick='sendMessage(" + r.id + ")' value='发送'>";
+	} else {
+		return "";
+	}
 }
 
 //表格展示部分
@@ -67,7 +92,8 @@ $("#messageTable").bootstrapTable({
 		{field:'retry',title:'重发次数'},
 		{field:'status',title:'消息状态'},
 		{field:'createTime',title:'创建时间'},
-		{field:'updateTime',title:'更新时间'}
+		{field:'updateTime',title:'更新时间'},
+		{field:'status',title:'',formatter:sendBtnFormatter}
 	]]
 });
 

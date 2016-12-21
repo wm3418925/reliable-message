@@ -51,6 +51,13 @@ public class MessageServiceImpl implements MessageServiceInterface {
 		msg.updateTime = new Date();
 		return 1 == messageService.updateById(msg);
 	}
+	@Override
+	public boolean reliveAndSendMessage(String msgId) {
+		if (!reliveMessage(msgId))
+			return false;
+		sendMessage(msgId);
+		return true;
+	}
 
 	private boolean confirmAndSendMessage(Message msg) {
 		// TODO 发送消息

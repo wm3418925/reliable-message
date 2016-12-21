@@ -12,6 +12,7 @@ public interface MessageServiceInterface {
 	boolean killMessage(String msgId);
 	boolean closeMessage(String msgId);
 	boolean reliveMessage(String msgId);
+	boolean reliveAndSendMessage(String msgId);
 
 	boolean confirmAndSendMessage(String msgId);
 	int confirmAndSendMessages(List<Message> msgList);
