@@ -20,6 +20,7 @@
 		
 		<module>message-mgr-web</module>
 		
+		<module>demo-initiative-business-core</module>
 		<module>demo-initiative-business</module>
 		<module>demo-message-business-consumer</module>
 		<module>demo-passive-business</module>

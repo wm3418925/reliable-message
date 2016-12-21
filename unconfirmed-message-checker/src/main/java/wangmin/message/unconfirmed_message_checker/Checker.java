@@ -28,6 +28,9 @@ public class Checker implements Runnable{
     private long confirmOneMsgMinusInterval;
 
     @Autowired
+    private Confirmer confirmer;
+
+    @Autowired
     private MessageServiceInterface messageService;
 
     public Checker() {
@@ -53,7 +56,7 @@ public class Checker implements Runnable{
                     List<String> notExistIdList = Lists.newArrayList();
                     for (Message msg : unconfirmedList) {
                         // TODO 与应用确认
-                        Boolean confirmResult = false;
+                        Boolean confirmResult = confirmer.confirm(msg);
 
                         if (null != confirmResult) {
                             if (confirmResult)

@@ -5,7 +5,7 @@
  http://www.springframework.org/schema/beans/spring-beans.xsd      
  http://code.alibabatech.com/schema/dubbo        
  http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-	
+
 	<dubbo:consumer timeout="10000" check="false" retries="0"></dubbo:consumer>
-	<dubbo:reference id="monitorService" interface="cwangmin.message.ttt.MonitorService" registry="defaultRegistry" version="1.0.0" />
+	<dubbo:reference id="messageService" interface="wangmin.message.core.remote.MessageServiceInterface" registry="defaultRegistry" version="1.0.0" />
 </beans>

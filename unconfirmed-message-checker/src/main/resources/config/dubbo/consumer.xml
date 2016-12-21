@@ -14,4 +14,6 @@
 
 	<dubbo:consumer timeout="10000" check="false" retries="0"></dubbo:consumer>
 	<dubbo:reference id="messageService" interface="wangmin.message.core.remote.MessageServiceInterface" registry="defaultRegistry" version="1.0.0" />
+
+	<dubbo:reference id="demoInitiativeBusinessService" interface="wangmin.demo_initiative_business.core.remote.DemoInitiativeBusinessServiceInterface" registry="defaultRegistry" version="1.0.0" />
 </beans>

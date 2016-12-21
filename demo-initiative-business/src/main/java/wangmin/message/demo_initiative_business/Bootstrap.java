@@ -51,7 +51,7 @@ public class Bootstrap extends AbstractIdleService implements ServletContextList
 	@Override
 	protected void startUp() throws Exception {
 		loadLog4jConfig();
-		logger.info("===================my-service START BEGIN==========================");
+		logger.info("===================demo-initiative-business START BEGIN==========================");
 		
 		Long startTime = System.nanoTime();
 		context = new ClassPathXmlApplicationContext(new String[] { "config/spring/context.xml" });
@@ -60,7 +60,7 @@ public class Bootstrap extends AbstractIdleService implements ServletContextList
 		Long interval = (System.nanoTime() - startTime) / 1000000000;
 		logger.info("service STARTED UP successfully in "+interval+" seconds...");
 		
-		logger.info("===================my-service START END==========================");
+		logger.info("===================demo-initiative-business START END==========================");
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class Bootstrap extends AbstractIdleService implements ServletContextList
 
 	//@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-		logger.info("demo-rpc service started ");
+		logger.info("demo-initiative-business service started ");
 		try {
 			startUp();
 		} catch (Exception ex) {
