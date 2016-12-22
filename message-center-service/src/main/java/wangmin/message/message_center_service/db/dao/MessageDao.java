@@ -1,4 +1,4 @@
-package wangmin.message.message_center_service.dao;
+package wangmin.message.message_center_service.db.dao;
 
 import wangmin.message.core.entity.Message;
 import wangmin.message.core.entity.MessageQuery;

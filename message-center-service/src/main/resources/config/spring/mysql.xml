@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 数据源 -->
-    <!--see https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_DruidDataSource%E5%8F%82%E8%80%83%E9%85%8D%E7%BD%AE-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
         <property name="url" value="${connection.url}"/>
@@ -63,13 +58,5 @@
             <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
-    
-    
-    <!-- 开启AOP监听 只对当前配置文件有效 -->
-    <!--<aop:aspectj-autoproxy expose-proxy="true"/>
-    <aop:config expose-proxy="true" proxy-target-class="true">
-        <aop:pointcut id="txPointcut" expression="execution(* wangmin.message.message_center_service.service..*+.*(..))"/>
-        <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut"/>
-    </aop:config>-->
 
 </beans>

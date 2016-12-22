@@ -1,4 +1,4 @@
-package wangmin.message.message_center_service.entity.row_mapper;
+package wangmin.message.message_center_service.db.row_mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

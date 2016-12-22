@@ -1,11 +1,10 @@
-package wangmin.message.message_center_service.dao;
+package wangmin.message.message_center_service.db.dao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,11 +12,8 @@ import com.google.common.collect.Lists;
 import wangmin.message.core.entity.Message;
 import wangmin.message.core.entity.MessageQuery;
 import wangmin.message.core.entity.MessageStatus;
-import wangmin.message.message_center_service.entity.row_mapper.MessageRowMapper;
+import wangmin.message.message_center_service.db.row_mapper.MessageRowMapper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 

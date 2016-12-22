@@ -1,4 +1,4 @@
-package wangmin.message.message_center_service.service;
+package wangmin.message.message_center_service.db.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import java.util.*;
 import wangmin.message.core.entity.Message;
 import wangmin.message.core.entity.MessageQuery;
 import wangmin.message.core.entity.MessageStatus;
-import wangmin.message.message_center_service.dao.MessageDao;
+import wangmin.message.message_center_service.db.dao.MessageDao;
 
 @Service
 public class MessageServiceImpl implements MessageService {

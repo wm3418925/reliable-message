@@ -50,6 +50,8 @@
 		<jsp-api.version>2.2</jsp-api.version>
 		<jstl.version>1.2</jstl.version>
 		<junit.version>4.11</junit.version>
+		<kafka.artifactId>kafka_2.11</kafka.artifactId>
+		<kafka.version>0.10.1.0</kafka.version>
 		<kryo.version>3.0.3</kryo.version>
 		<kryo-serializers.version>0.38</kryo-serializers.version>
 		<log4j.version>1.2.17</log4j.version>
@@ -516,6 +518,12 @@
 				</exclusions>
 			</dependency>
 			<!-- duubo end -->
+
+			<dependency>
+				<groupId>org.apache.kafka</groupId>
+				<artifactId>${kafka.artifactId}</artifactId>
+				<version>${kafka.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.mangofactory</groupId>

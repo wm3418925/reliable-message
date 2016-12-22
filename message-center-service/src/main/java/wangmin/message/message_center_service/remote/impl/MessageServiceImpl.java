@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import wangmin.message.core.entity.*;
 import wangmin.message.core.remote.MessageServiceInterface;
 import org.springframework.stereotype.Service;
-import wangmin.message.message_center_service.service.MessageService;
+import wangmin.message.message_center_service.db.service.MessageService;
+import wangmin.message.message_center_service.send_message.MessageSenderInterface;
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 public class MessageServiceImpl implements MessageServiceInterface {
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private MessageSenderInterface messageSender;
 
 	@Override
 	public Message createMessage(String msgId, String source, String queue, String content, MessageStatus status) {
@@ -59,26 +62,19 @@ public class MessageServiceImpl implements MessageServiceInterface {
 		return true;
 	}
 
-	private boolean confirmAndSendMessage(Message msg) {
-		// TODO 发送消息
-
-		msg.status = MessageStatus.MessageStatus_sending;
-		msg.updateTime = new Date();
-		return 1 == messageService.updateById(msg);
-	}
 	@Override
 	public boolean confirmAndSendMessage(String msgId) {
 		Message msg = messageService.findOneByIdAndStatus(msgId, MessageStatus.MessageStatus_unconfirmed);
 		if (null == msg)
 			return false;
 
-		return confirmAndSendMessage(msg);
+		return sendMessage(msg);
 	}
 	@Override
 	public int confirmAndSendMessages(List<Message> msgList) {
 		int res = 0;
 		for (Message msg : msgList) {
-			if (confirmAndSendMessage(msg))
+			if (sendMessage(msg))
 				++res;
 		}
 		return res;
@@ -100,7 +96,7 @@ public class MessageServiceImpl implements MessageServiceInterface {
 			return false;
 		}
 
-		// TODO 发送消息
+		messageSender.sendMessage(msg);
 
 		msg.status = MessageStatus.MessageStatus_sending;
 		++msg.retry;
