@@ -13,5 +13,8 @@
 	<dubbo:registry address="${dubbo.zookeeper.address}" id="defaultRegistry" />
 
 	<dubbo:consumer timeout="10000" check="false" retries="0"></dubbo:consumer>
+
 	<dubbo:reference id="messageService" interface="wangmin.message.core.remote.MessageServiceInterface" registry="defaultRegistry" version="1.0.0" />
+
+	<dubbo:reference id="demoPassiveBusiness" interface="wangmin.message.demo_passive_business_core.remote.DemoPassiveBusinessInterface" registry="defaultRegistry" version="1.0.0" />
 </beans>

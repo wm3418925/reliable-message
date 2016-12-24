@@ -12,12 +12,12 @@
 	<!-- registry address, used for consumer to discover services -->
 	<dubbo:registry address="${dubbo.zookeeper.address}" id="defaultRegistry" />
 	
-	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<!-- 用dubbo协议暴露服务 -->
 	<dubbo:protocol name="dubbo" serialization="kryo" port="${dubbo.service.port}" optimizer="wangmin.demo_initiative_business.core.entity.serialization.SerializationOptimizerImpl" />
 	
 	<dubbo:monitor protocol="registry" />
 	
-	<!-- dubbo接口 -->
+	<!-- 接口 -->
 	<dubbo:service interface="wangmin.demo_initiative_business.core.remote.DemoInitiativeBusinessServiceInterface" ref="demoInitiativeBusinessService" registry="defaultRegistry" timeout="2000" retries="0" version="1.0.0" />
 </beans>
 

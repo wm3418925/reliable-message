@@ -7,16 +7,16 @@
 	   default-lazy-init="false">
 	
 	<!-- application name -->
-	<dubbo:application name="message-service" />
+	<dubbo:application name="demo-passive-business" />
 	
 	<!-- registry address, used for consumer to discover services -->
 	<dubbo:registry address="${dubbo.zookeeper.address}" id="defaultRegistry" />
 	
 	<!-- 用dubbo协议暴露服务 -->
-	<dubbo:protocol name="dubbo" port="${dubbo.service.port}" serialization="kryo" optimizer="wangmin.message.core.entity.serialization.SerializationOptimizerImpl" />
+	<dubbo:protocol name="dubbo" port="${dubbo.service.port}" serialization="kryo" optimizer="wangmin.message.demo_passive_business_core.entity.serialization.SerializationOptimizerImpl" />
 
 	<dubbo:monitor protocol="registry" />
 	
 	<!-- 接口 -->
-	<dubbo:service interface="wangmin.message.core.remote.MessageServiceInterface" ref="messageService" registry="defaultRegistry" timeout="2000" retries="0" version="1.0.0" />
+	<dubbo:service interface="wangmin.message.demo_passive_business_core.remote.DemoPassiveBusinessInterface" ref="demoPassiveBusiness" registry="defaultRegistry" timeout="2000" retries="0" version="1.0.0" />
 </beans>

@@ -13,5 +13,6 @@
 	<context:property-placeholder ignore-unresolvable="true" local-override="true"
 								  location="classpath:/config/properties/app.properties"/>
 
-
+	<!-- dubbo配置 -->
+	<import resource="classpath:/config/dubbo/provider.xml" />
 </beans>

@@ -6,20 +6,24 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
+import wangmin.message.demo_passive_business_core.remote.DemoPassiveBusinessInterface;
 
 /**
  * Created by wm on 2016/12/23.
  */
 public class MessageConsumer implements Runnable {
+    private final DemoPassiveBusinessInterface demoPassiveBusiness;
     private final List<String> topics;
     private final String groupId;
     private final KafkaConsumer<String, String> consumer;
 
 
     public MessageConsumer(
+            DemoPassiveBusinessInterface demoPassiveBusiness,
             List<String> topics,
             String groupId,
             Properties props) {
+        this.demoPassiveBusiness = demoPassiveBusiness;
         this.topics = topics;
         this.groupId = groupId;
         this.consumer = new KafkaConsumer<>(props);
@@ -33,12 +37,13 @@ public class MessageConsumer implements Runnable {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(1<<12);
                 for (ConsumerRecord<String, String> record : records) {
-                    Map<String, Object> data = new HashMap<>();
+                    /*Map<String, Object> data = new HashMap<>();
                     data.put("partition", record.partition());
                     data.put("offset", record.offset());
                     data.put("value", record.value());
-                    data.put("key", record.key());
-                    System.out.println("data : " + data);
+                    data.put("key", record.key());*/
+
+                    demoPassiveBusiness.test(record.value());
                 }
             }
         } catch (WakeupException e) {
