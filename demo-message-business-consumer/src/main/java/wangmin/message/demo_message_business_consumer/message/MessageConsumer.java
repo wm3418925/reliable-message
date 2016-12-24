@@ -6,12 +6,14 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
+import wangmin.message.core.remote.MessageServiceInterface;
 import wangmin.message.demo_passive_business_core.remote.DemoPassiveBusinessInterface;
 
 /**
  * Created by wm on 2016/12/23.
  */
 public class MessageConsumer implements Runnable {
+    private final MessageServiceInterface messageService;
     private final DemoPassiveBusinessInterface demoPassiveBusiness;
     private final List<String> topics;
     private final String groupId;
@@ -19,10 +21,12 @@ public class MessageConsumer implements Runnable {
 
 
     public MessageConsumer(
+            MessageServiceInterface messageService,
             DemoPassiveBusinessInterface demoPassiveBusiness,
             List<String> topics,
             String groupId,
             Properties props) {
+        this.messageService = messageService;
         this.demoPassiveBusiness = demoPassiveBusiness;
         this.topics = topics;
         this.groupId = groupId;
@@ -43,7 +47,9 @@ public class MessageConsumer implements Runnable {
                     data.put("value", record.value());
                     data.put("key", record.key());*/
 
-                    demoPassiveBusiness.test(record.value());
+                    if (demoPassiveBusiness.test(record.value())) {
+                        messageService.closeMessage(record.key());
+                    }
                 }
             }
         } catch (WakeupException e) {

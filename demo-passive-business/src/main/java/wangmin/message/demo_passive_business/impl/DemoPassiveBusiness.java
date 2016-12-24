@@ -14,11 +14,13 @@ public class DemoPassiveBusiness implements DemoPassiveBusinessInterface {
     private static final Logger logger = LoggerFactory.getLogger(DemoPassiveBusiness.class);
 
     @Override
-    public void test(Message message) {
+    public boolean test(Message message) {
         logger.info("message="+message);
+        return (System.currentTimeMillis() & 1) == 0;
     }
     @Override
-    public void test(String str) {
+    public boolean test(String str) {
         logger.info("str="+str);
+        return (System.currentTimeMillis() & 1) == 0;
     }
 }

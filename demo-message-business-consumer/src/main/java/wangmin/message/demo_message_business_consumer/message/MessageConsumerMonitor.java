@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import wangmin.message.core.remote.MessageServiceInterface;
 import wangmin.message.demo_passive_business_core.remote.DemoPassiveBusinessInterface;
 
 import java.util.*;
@@ -21,6 +22,8 @@ public class MessageConsumerMonitor {
     private final String groupId;
     private final Properties props;
 
+    @Autowired
+    private MessageServiceInterface messageService;
     @Autowired
     private DemoPassiveBusinessInterface demoPassiveBusiness;
 
@@ -50,7 +53,7 @@ public class MessageConsumerMonitor {
 
         final List<MessageConsumer> consumers = Lists.newArrayList();
         for (int i = 0; i < consumerCount; i++) {
-            MessageConsumer consumer = new MessageConsumer(demoPassiveBusiness, topics, groupId, props);
+            MessageConsumer consumer = new MessageConsumer(messageService, demoPassiveBusiness, topics, groupId, props);
             consumers.add(consumer);
             executor.submit(consumer);
         }
