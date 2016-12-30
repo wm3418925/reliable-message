@@ -6,28 +6,29 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import wangmin.message.core.remote.MessageServiceInterface;
+import wangmin.message.core.spring.SpringUtils;
 import wangmin.message.demo_passive_business_core.remote.DemoPassiveBusinessInterface;
 
 /**
  * Created by wm on 2016/12/23.
  */
 public class MessageConsumer implements Runnable {
-    private final MessageServiceInterface messageService;
-    private final DemoPassiveBusinessInterface demoPassiveBusiness;
+    private static final Logger logger = LoggerFactory.getLogger(MessageConsumer.class);
+
+    private final MessageServiceInterface messageService = SpringUtils.getBean(MessageServiceInterface.class);
+    private final DemoPassiveBusinessInterface demoPassiveBusiness = SpringUtils.getBean(DemoPassiveBusinessInterface.class);
     private final List<String> topics;
     private final String groupId;
     private final KafkaConsumer<String, String> consumer;
 
 
     public MessageConsumer(
-            MessageServiceInterface messageService,
-            DemoPassiveBusinessInterface demoPassiveBusiness,
             List<String> topics,
             String groupId,
             Properties props) {
-        this.messageService = messageService;
-        this.demoPassiveBusiness = demoPassiveBusiness;
         this.topics = topics;
         this.groupId = groupId;
         this.consumer = new KafkaConsumer<>(props);
@@ -47,8 +48,10 @@ public class MessageConsumer implements Runnable {
                     data.put("value", record.value());
                     data.put("key", record.key());*/
 
+                    logger.info("received message, key={}, value={}", record.key(), record.value());
                     if (demoPassiveBusiness.test(record.value())) {
                         messageService.closeMessage(record.key());
+                        logger.info("message closed, key={}, value={}", record.key(), record.value());
                     }
                 }
             }

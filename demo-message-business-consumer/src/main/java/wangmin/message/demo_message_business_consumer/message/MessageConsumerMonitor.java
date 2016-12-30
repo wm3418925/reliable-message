@@ -4,8 +4,6 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import wangmin.message.core.remote.MessageServiceInterface;
-import wangmin.message.demo_passive_business_core.remote.DemoPassiveBusinessInterface;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -22,10 +20,6 @@ public class MessageConsumerMonitor {
     private final String groupId;
     private final Properties props;
 
-    @Autowired
-    private MessageServiceInterface messageService;
-    @Autowired
-    private DemoPassiveBusinessInterface demoPassiveBusiness;
 
     @Autowired
     public MessageConsumerMonitor(
@@ -33,8 +27,8 @@ public class MessageConsumerMonitor {
             @Value(value = "${kafka.topics}") String topicsStr,
             @Value(value = "${kafka.group.id}") String groupId,
             @Value(value = "${kafka.bootstrap.servers}") String bootstrapServers,
-            @Value(value = "${kafka.key.serializer}") String keySerializer,
-            @Value(value = "${kafka.value.serializer}") String valueSerializer) {
+            @Value(value = "${kafka.key.deserializer}") String keyDeserializer,
+            @Value(value = "${kafka.value.deserializer}") String valueDeserializer) {
         this.consumerCount = consumerCount;
         this.topics = Lists.newArrayList(topicsStr.split(","));
         this.groupId = groupId;
@@ -42,8 +36,8 @@ public class MessageConsumerMonitor {
         props = new Properties();
         props.put("group.id", groupId);
         props.put("bootstrap.servers", bootstrapServers);
-        props.put("key.deserializer", keySerializer);
-        props.put("value.deserializer", valueSerializer);
+        props.put("key.deserializer", keyDeserializer);
+        props.put("value.deserializer", valueDeserializer);
 
         startAllConsumers();
     }
@@ -53,7 +47,7 @@ public class MessageConsumerMonitor {
 
         final List<MessageConsumer> consumers = Lists.newArrayList();
         for (int i = 0; i < consumerCount; i++) {
-            MessageConsumer consumer = new MessageConsumer(messageService, demoPassiveBusiness, topics, groupId, props);
+            MessageConsumer consumer = new MessageConsumer(topics, groupId, props);
             consumers.add(consumer);
             executor.submit(consumer);
         }

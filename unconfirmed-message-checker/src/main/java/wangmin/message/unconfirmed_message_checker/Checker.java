@@ -66,13 +66,18 @@ public class Checker implements Runnable{
                     }
 
                     try {
-                        int removeCount = messageService.removeMessages(notExistIdList);
-                        logger.info("removed confirmed not exist msg count={}, list={}", removeCount, notExistIdList);
+                        if (!notExistIdList.isEmpty()) {
+                            int removeCount = messageService.removeMessages(notExistIdList);
+                            logger.info("removed confirmed not exist msg count={}, list={}", removeCount, notExistIdList);
+                        }
                     } catch (Exception e) {
                         logger.warn("", e);
                     }
 
-                    sendCount = messageService.confirmAndSendMessages(confirmedList);
+                    if (!confirmedList.isEmpty()) {
+                        sendCount = messageService.confirmAndSendMessages(confirmedList);
+                        logger.info("confirmed msg count={}, list={}", sendCount, confirmedList);
+                    }
                 }
             } catch (Exception e) {
                 logger.warn("", e);

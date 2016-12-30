@@ -10,6 +10,6 @@ public class DemoInitiativeBusinessServiceImpl implements DemoInitiativeBusiness
 
 	@Override
 	public boolean isMessageBusinessExist(String msgId) {
-		return StringUtils.isNotEmpty(msgId) && (msgId.charAt(0) & 1) == 0;
+		return StringUtils.isNotEmpty(msgId) && (msgId.charAt(msgId.length()-1) & 1) == 0;
 	}
 }

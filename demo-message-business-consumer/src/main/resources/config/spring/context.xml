@@ -13,6 +13,8 @@
 	<context:property-placeholder ignore-unresolvable="true" local-override="true"
 								  location="classpath:/config/properties/app.properties"/>
 
+	<bean class="wangmin.message.core.spring.SpringUtils"/>
+
 	<!-- dubbo配置 -->
 	<import resource="classpath:/config/dubbo/consumer.xml" />
 
