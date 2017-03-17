@@ -11,19 +11,29 @@
     <packaging>pom</packaging>
 	
 	<modules>
+		<!-- 定义消息对象和消息接口 -->
 		<module>message-core</module>
-		
+
+		<!-- 核心消息服务 -->
 		<module>message-center-service</module>
 
+		<!-- 未确认消息处理, 调用主动业务的业务确认接口 -->
 		<module>unconfirmed-message-checker</module>
+		<!-- 未消费消息处理, 发送给消息消费者 -->
 		<module>unconsumed-message-checker</module>
-		
+
+		<!-- 消息管理的web程序, 主要用在错误人工处理 -->
 		<module>message-mgr-web</module>
-		
+
+		<!-- 主动业务 的 业务接口 -->
 		<module>demo-initiative-business-core</module>
+		<!-- 主动业务demo, 会生产消息 -->
 		<module>demo-initiative-business</module>
+		<!-- 消息消费者, 接收消息 调用demo-passive-business的业务接口, 获得接口返回值之后 确认消息 -->
 		<module>demo-message-business-consumer</module>
+		<!-- 定义被动业务 的 业务接口 -->
 		<module>demo-passive-business-core</module>
+		<!-- 被动业务, 被demo-message-business-consumer调用 -->
 		<module>demo-passive-business</module>
 	</modules>
 
