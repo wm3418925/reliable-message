@@ -1,4 +1,5 @@
 # reliable-message
+
 各个模块的作用:
 
 message-core:                   定义消息对象和消息接口
